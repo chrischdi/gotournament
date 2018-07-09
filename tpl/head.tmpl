@@ -1,0 +1,43 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv=”Pragma” content=”no-cache”>
+    <meta http-equiv=”Expires” content=”-1″>
+    <meta http-equiv=”CACHE-CONTROL” content=”NO-CACHE”>
+    <title>{{ .Title }}</title>
+    <style>
+header a {
+    text-decoration: none;
+    padding: 8px;
+    font-size: 1.2em;
+    border: 1px solid;
+    color: #000000;
+    background-color: #f0f0f0;
+}
+header a:visited {
+    color: #000000;
+}
+header a:hover {
+    background-color: #aaaaaa;
+}
+.matchplan div {
+    float: left;
+}
+.linebreak {
+    clear: left;
+}
+.goals {
+    width: 2.5em;
+    text-align: center;
+}
+    </style>
+    <!--<script src="/static/jquery-3.2.1.min.js"></script>-->
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+    <header style="padding: 3px;">
+{{- range .Nav }}
+        <a href="{{ .Uri }}" id="{{ .ID }}">{{ .Name }}</a>
+{{- end }}
+    </header>

@@ -1,0 +1,11 @@
+<tr>
+<form action="/game/goals">
+    <input type="hidden" name="uuid" value="{{.UUID}}"/>
+    <td>Time</td>
+    <td>{{.Nr}}.</td>
+    <td>{{.TeamA.Name}}</td>
+    <td><input type="text" name="GoalsA" value="{{.GoalsA}}" size="2"/> : <input type="text" name="GoalsB" value="{{.GoalsB}}" size="2"/></td>
+    <td>{{.TeamB.Name}}</td>
+    <td><input type="submit" value="Save"/></td>
+</form>
+</tr>

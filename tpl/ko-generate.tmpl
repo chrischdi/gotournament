@@ -1,0 +1,14 @@
+<h1>KO Runde</h1>
+<div>Achtung: Das generieren eines neuen KO-Runden Spielplans überschreibt einen bestehenden KO-Runden Spielplan!</div>
+<form method="post" action="/ko/generate/confirm">
+    <div>Best of: 
+        <select style="display: block;" name="bestof">
+            <option value="4">4</option>
+            <option value="8">8</option>
+            <option value="16">16</option>
+            <option value="32">32</option>
+        </select>
+    </div>
+    <div style="margin: 15px;"><input type="submit" name="Save" value="Bestätigen" style="width: 6em; text-align: center; display: block; border: 1px solid; padding: 5px; text-decoration: none; color: #000000;"/></div>
+</form>
+<div style="margin: 15px;"><a href="/ko" style="width: 6em; text-align: center; display: block; border: 1px solid; padding: 5px; text-decoration: none; color: #000000;">Abbrechen</a></div>

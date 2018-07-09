@@ -1,0 +1,36 @@
+<h1>Complete Table</h1>
+<div style="float: left; margin: 0 10px;">
+    <table style="text-align: center;">
+    <tr>
+        <th>Platz</th>
+        <th>Team</th>
+        <th>KO Spiele</th>
+        <th>KO Diff</th>
+        <th>KO T</th>
+        <th>KO GT</th>
+        <th>KO P</th>
+        <th>G Spiele</th>
+        <th>G Diff</th>
+        <th>G T</th>
+        <th>G GT</th>
+        <th>G P</th>
+    </tr>
+    {{ range $k, $t := .Teams.SortedTeams }}
+    <tr>
+        <th>{{ add $k 1 }}</th>
+        <td>{{ $t.Name }}</td>
+        <td>{{ $t.KOStats.PlayedGames }}</td>
+        <td>{{ $t.KOStats.GoalDifference }}</td>
+        <td>{{ $t.KOStats.GoalsFor }}</td>
+        <td>{{ $t.KOStats.GoalsAgainst }}</td>
+        <td>{{ $t.KOStats.Points }}</td>
+        <td>{{ $t.GroupStats.PlayedGames }}</td>
+        <td>{{ $t.GroupStats.GoalDifference }}</td>
+        <td>{{ $t.GroupStats.GoalsFor }}</td>
+        <td>{{ $t.GroupStats.GoalsAgainst }}</td>
+        <td>{{ $t.GroupStats.Points }}</td>
+    </tr>
+    {{ end }}
+    </table>
+</div>
+

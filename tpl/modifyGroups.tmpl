@@ -1,0 +1,17 @@
+<h2>Modify Groups</h2>
+{{ if eq (len .Groups) 0 }}
+<p>No groups are added.</p>
+{{ end }}
+{{ range $k, $g := .Groups.SortedByName }}
+<div style="float: left; padding: 0 20px; margin: 0px; border-left: solid 1px; border-right: solid 1px;">
+    <h3>{{ .Name }}</h3>
+    <form method="post" action="/setup/update/group/{{ $g.UUID }}">
+        <input type="hidden" name="uuids" value="{{ range $i, $t := $g.Teams }}{{ if $i }},{{ end }}{{ $t.UUID }}{{ end }}"/>
+        {{ range $g.Teams }}
+        <input style="display: block;" type="text" name="{{.UUID}}" value="{{.Name}}"/>
+        {{ end }}
+        <input type="submit" name="Save" value="Save"/>
+    </form>
+</div>
+{{ end }}
+<div style="clear: left;"></div>

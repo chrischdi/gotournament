@@ -1,0 +1,29 @@
+<h1>Tabellen</h1>
+{{ range .Groups.SortedByName }}
+<div style="float: left; margin: 0 10px;">
+    <h2>{{ .Name }}</h2>
+    <table style="text-align: center;">
+    <tr>
+        <th>Platz</th>
+        <th>Team</th>
+        <th>Spiele</th>
+        <th>Diff</th>
+        <th>T</th>
+        <th>GT</th>
+        <th>P</th>
+    </tr>
+    {{ range $k, $t := .SortedGroup }}
+    <tr>
+        <th>{{ add $k 1 }}</th>
+        <td>{{ $t.Name }}</td>
+        <td>{{ $t.GroupStats.PlayedGames }}</td>
+        <td>{{ $t.GroupStats.GoalDifference }}</td>
+        <td>{{ $t.GroupStats.GoalsFor }}</td>
+        <td>{{ $t.GroupStats.GoalsAgainst }}</td>
+        <td>{{ $t.GroupStats.Points }}</td>
+    </tr>
+    {{ end }}
+    </table>
+</div>
+{{ end }}
+

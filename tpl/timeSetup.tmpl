@@ -1,0 +1,6 @@
+<form action="/setup/update/time">
+    <p>Start time: <input type="text" name="start" value="{{ .Start }}" style="text-align: center; width: 4em;"/> (Format: HH:MM)</p>
+    <p>Game duration: <input type="number" name="duration" value="{{ .Duration }}" min="0" value="{{.}}" style="text-align: center; width: 3em;"/>minutes</p>
+    <p>Pause to KO: <input type="number" name="pause" value="{{ .Pause }}" style="text-align: center; width: 3em;"/>minutes</p>
+    <p><input type="submit" value="Update"/></p>
+</form>

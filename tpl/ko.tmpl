@@ -1,0 +1,49 @@
+{{- $matchdays := .KOMatchDays -}}
+<h1>KO Runde</h1>
+{{ if not allGroupGamesDone -}}
+<h3 style="color: #a52727;">Not all games done. Schedule may need to get reset.</h3>
+{{ else -}}
+<h3>All games done</h3>
+{{- end }}
+<a href="/ko/generate" style="border: 1px solid; padding: 5px; text-decoration: none; color: #000000;">KO Spielplan generieren</a>
+{{ range $i := .KOMatchDaysList }}
+{{ $s := index $matchdays $i }}
+<h2>Best of {{ multipl 2 (len $s.GamesList) }}</h2>
+<table>
+    <tr>
+        <th style="padding: 0 5px;">Uhrzeit</th>
+        <th style="padding: 0 5px;">Platz</th>
+        <th style="padding: 0 5px;">Spiel ID</th>
+        <th style="min-width: 7em;"></th>
+        <th></th>
+        <th style="min-width: 7em;"></th>
+        <th></th>
+    </tr>
+    {{ range $s.Games }}
+
+    <tr>
+        <th>{{ .Time.Format "15:04" }}</th>
+        <th>{{ .Place }}</th>
+        <th>{{ .GameName }}</th>
+    <form action="/ko/set">
+        <input type="hidden" name="uuid" value="{{ .UUID }}">
+        <td style="text-align: right;">{{ .NameA }}</td>
+        <td>{{- "" -}}
+            <input type="number" min="0" name="GoalsA" value="{{ .Stats.GoalsA }}" class="goals"/>
+            {{- "" -}}:{{- "" -}}
+            <input type="number" min="0" name="GoalsB" value="{{ .Stats.GoalsB }}" class="goals"/>
+        </td>
+        <td style="text-align: left;">{{ .NameB }}</td>
+        <td>
+        {{- if .IsPlayable -}}
+            <input style="
+                {{- if not .Stats.Played }} background-color: #ff000077; {{ end -}}
+                " type="submit" value="Speichern"/>
+        {{- end }}
+        </td>
+    </form>
+    </tr>
+
+    {{ end }}
+</table>
+{{ end }}

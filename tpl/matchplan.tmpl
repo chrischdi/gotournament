@@ -1,0 +1,40 @@
+<h1>Spielplan Gruppenphase</h1>
+<div>
+<table>
+<tr>
+    <th>Runde</th>
+    <th>Uhrzeit</th>
+    <td style="width: 2em;"></td>
+    {{ range $i, $s := .Config.Places }}
+        <th colspan="4">Spiel {{ $s }}</th>
+        {{ if not (lastPlace $i) }}<th style="width: 2em;"></th>{{ end }}
+    {{ end }}
+</tr>
+{{ range $i, $s := .GroupMatchDaysList }}
+<tr>
+<th>{{ add $i 1 }}</th>
+{{- $gmd := getMatchDay $s }}
+<th>{{ $gmd.Time.Format "15:04" }}</th><td>
+</td>
+    {{ range $j, $g := $gmd.Games }}
+    <form action="/matchplan/set">
+        <input type="hidden" name="uuid" value="{{ $g.UUID }}">
+        <td style="text-align: right;">{{ $g.A.Name }}</td>
+        <td>{{- "" -}}
+            <input type="number" min="0" name="GoalsA" value="{{ $g.Stats.GoalsA }}" class="goals"/>
+            {{- "" -}}:{{- "" -}}
+            <input type="number" min="0" name="GoalsB" value="{{ $g.Stats.GoalsB }}" class="goals"/>
+        </td>
+        <td style="text-align: left;">{{ $g.B.Name }}</td>
+        <td>
+        <input style="
+            {{- if not $g.Stats.Played }} background-color: #ff000077; {{ end -}}
+            " type="submit" value="Speichern"/>
+        </td>
+        {{ if not (lastMatchdaygame $gmd.Games $j) }}<td><td>{{ end }}
+    </form>
+    {{ end }}
+</tr>
+{{- end }}
+</table>
+</div>
