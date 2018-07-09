@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chrischdi/gotournament.svg?branch=master)](https://travis-ci.org/chrischdi/gotournament)
+
 # Description
 
 This is a application which serves a http website to be used as a management application for tournaments.
