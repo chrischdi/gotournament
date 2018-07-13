@@ -14,6 +14,7 @@ do
   split=(${platform//\// })
   goos=${split[0]}
   goarch=${split[1]}
+	echo "# Building for $platform: $goos $goarch"
 
   # prepare
   ext=""
