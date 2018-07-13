@@ -24,6 +24,9 @@ do
 
   # build
   CGO_ENABLED=0 GOOS=$goos GOARCH=$goarch go build -ldflags='-s -w' -v -o bin/$goos/$goarch/$name$ext $gofile
+	
+	# add tpl
+	cp -r tpl bin/$goos/$goarch/tpl
   
   # pack
   tar cfvz tar/$name-$goos-$goarch.tar.gz -C bin/$goos/$goarch .
