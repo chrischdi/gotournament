@@ -19,8 +19,8 @@ deploy:
     - $TRAVIS_BUILD_DIR/tar/gotournament-linux-amd64.tar.gz
     - $TRAVIS_BUILD_DIR/tar/gotournament-linux-arm64.tar.gz
     - $TRAVIS_BUILD_DIR/tar/gotournament-linux-arm.tar.gz
-    - $TRAVIS_BUILD_DIR/tar/gotournament-windows-386.tar.gz
-    - $TRAVIS_BUILD_DIR/tar/gotournament-windows-amd64.tar.gz
+    - $TRAVIS_BUILD_DIR/tar/gotournament-windows-386.zip
+    - $TRAVIS_BUILD_DIR/tar/gotournament-windows-amd64.zip
   skip_cleanup: true
   overwrite: true
   on:

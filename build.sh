@@ -30,5 +30,12 @@ do
 	cp -r tpl bin/$goos/$goarch/tpl
   
   # pack
-  tar cfvz tar/$name-$goos-$goarch.tar.gz -C bin/$goos/$goarch .
+	if [ "$goos" == "windows" ]; then
+		base=$(pwd)
+		pushd bin/$goos/$goarch
+		zip -r $base/tar/$name-$goos-$goarch.zip ./*
+		popd
+	else
+	  tar cfvz tar/$name-$goos-$goarch.tar.gz -C bin/$goos/$goarch .
+	fi
 done
