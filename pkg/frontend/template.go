@@ -3,11 +3,10 @@ package frontend
 import (
 	"fmt"
 	"net/http"
-	"os"
-	"path/filepath"
 	"text/template"
 
 	"github.com/chrischdi/gotournament/pkg/matchday"
+	"github.com/chrischdi/gotournament/tpl"
 
 	"github.com/chrischdi/gotournament/pkg/config"
 	"github.com/chrischdi/gotournament/pkg/game"
@@ -50,20 +49,11 @@ func allGroupGamesDone() bool {
 	return true
 }
 
-func writeTemplate(w http.ResponseWriter, tpl string, vars interface{}) error {
-	s, err := os.Executable()
-	if err != nil {
-		fmt.Printf("error: %v", err)
-		return err
-	}
-	dir, _ := filepath.Split(s)
-
-	path := filepath.Join(dir, "tpl", tpl)
-
-	t, err := template.New(tpl).Funcs(funcMap).ParseFiles(path)
+func writeTemplate(w http.ResponseWriter, tplName string, vars interface{}) error {
+	t, err := template.New(tplName).Funcs(funcMap).ParseFS(tpl.Content, tplName)
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
-		return fmt.Errorf("error opening template %s: %v", tpl, err)
+		return fmt.Errorf("error opening template %s: %v", tplName, err)
 	}
 
 	err = t.Execute(w, vars)
