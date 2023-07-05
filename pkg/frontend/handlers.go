@@ -17,6 +17,7 @@ import (
 	"github.com/chrischdi/gotournament/pkg/matchday"
 	"github.com/chrischdi/gotournament/pkg/schedule"
 	"github.com/chrischdi/gotournament/pkg/team"
+	"github.com/chrischdi/gotournament/tpl"
 )
 
 func registerHandlers() {
@@ -62,7 +63,7 @@ func setup(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, "<h2>Time</h2>\n")
 	t = template.New("timeSetup")
-	t, err = template.ParseFiles(filepath.Join("tpl", "timeSetup.tmpl"))
+	t, err = template.ParseFS(tpl.Content, "timeSetup.tmpl")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 	}
@@ -71,13 +72,14 @@ func setup(w http.ResponseWriter, r *http.Request) {
 			"Start":    fmt.Sprintf("%02d:%02d", config.ConfigData.Start.Hour(), config.ConfigData.Start.Minute()),
 			"Duration": config.ConfigData.GameDuration.Minutes(),
 			"Pause":    config.ConfigData.KOPause.Minutes(),
+			"NrPlaces": len(config.ConfigData.Places),
 		})
 
 	writeTemplate(w, "modifyGroups.tmpl", data.GetData())
 
 	fmt.Fprintf(w, "<h2>Add Groups</h2>\n")
 	t = template.New("addGroup")
-	t, err = template.ParseFiles(filepath.Join("tpl", "addGroup.tmpl"))
+	t, err = template.ParseFS(tpl.Content, "addGroup.tmpl")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 	}
@@ -253,7 +255,13 @@ func setupUpdate(w http.ResponseWriter, r *http.Request) error {
 		data.SaveFile()
 		// Tournament().UpdateTime(starth, startm, duration, pause)
 		// Tournament().UpdateKOTime()
-
+	case "places":
+		nrPlaces, err := strconv.Atoi(r.FormValue("nrplaces"))
+		if err != nil {
+			return fmt.Errorf("error updating time: %v", err)
+		}
+		config.UpdatePlaces(nrPlaces)
+		schedule.CalculateGroupSchedule()
 	case "group":
 		for _, v := range strings.Split(r.FormValue("uuids"), ",") {
 			err := team.UpdateTeamName(v, r.FormValue(v))

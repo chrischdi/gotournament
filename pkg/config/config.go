@@ -35,3 +35,14 @@ func UpdateTime(starth, startm, duration, pause int) {
 	ConfigData.GameDuration = time.Duration(duration) * time.Minute
 	ConfigData.KOPause = time.Duration(pause) * time.Minute
 }
+
+func UpdatePlaces(nr int) {
+	fmt.Printf("updating places to %d\n", nr)
+	places := []*string{}
+	for i := 1; i <= nr; i++ {
+		s := fmt.Sprintf("Tor %d", i)
+		fmt.Printf("adding places %s\n", s)
+		places = append(places, &s)
+	}
+	ConfigData.Places = places
+}
