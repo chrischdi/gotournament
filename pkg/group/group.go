@@ -63,7 +63,7 @@ func newGroup(name string) *Group {
 }
 
 func AddEmptyGroup(q int) error {
-	letter := string(int('A') + len(GroupsData))
+	letter := string('A' + int32(len(GroupsData)))
 	name := "Group " + letter
 	teams := []string{}
 
