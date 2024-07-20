@@ -2,7 +2,7 @@
 
 set -e
 
-platforms="darwin/386 darwin/amd64 linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/amd64"
+platforms="darwin/amd64 linux/amd64 linux/arm linux/arm64 windows/386 windows/amd64"
 
 name="gotournament"
 gofile="cmd/gotournament.go"
@@ -27,7 +27,6 @@ do
   CGO_ENABLED=0 GOOS=$goos GOARCH=$goarch go build -ldflags='-s -w' -v -o bin/$goos/$goarch/$name$ext $gofile
 	
 	# add tpl
-	cp -r tpl bin/$goos/$goarch/tpl
   
   # pack
 	if [ "$goos" == "windows" ]; then

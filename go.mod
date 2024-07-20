@@ -1,5 +1,5 @@
 module github.com/chrischdi/gotournament
 
-go 1.19
+go 1.22
 
-require github.com/google/uuid v0.0.0-20161128191214-064e2069ce9c
+require github.com/google/uuid v1.6.0
